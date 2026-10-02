@@ -3,75 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questionário Socioeconômico Profissional</title>
+    <title>Questionario Socioeconomico</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
-        .container { max-width: 1400px; margin: 0 auto; background: #ffffff; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); padding: 40px; }
-        
-        header { text-align: center; margin-bottom: 40px; padding: 30px; background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); border-radius: 15px; color: white; }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        header p { font-size: 1.1rem; opacity: 0.95; }
-        
-        .stats-bar { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 12px; margin-bottom: 30px; text-align: center; color: white; font-weight: 600; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
-        
-        .categoria { margin-bottom: 40px; background: #f8f9ff; padding: 30px; border-radius: 15px; border-left: 6px solid #2a5298; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .categoria h2 { color: #1e3c72; font-size: 1.8rem; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 3px solid #667eea; font-weight: 700; }
-        
-        .pergunta-row { display: flex; align-items: center; gap: 25px; margin-bottom: 25px; padding: 20px; background: #ffffff; border-radius: 12px; border: 2px solid #e3e8f7; transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .pergunta-row:hover { border-color: #667eea; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2); transform: translateY(-2px); }
-        
-        .pergunta-info { flex: 1; min-width: 300px; }
-        .pergunta-info label { display: block; color: #1e3c72; font-weight: 600; margin-bottom: 10px; font-size: 1.05rem; }
-        .pergunta-info select { width: 100%; padding: 12px 15px; border: 2px solid #d1d9ff; border-radius: 8px; background: #ffffff; color: #2a5298; font-size: 1rem; cursor: pointer; transition: all 0.3s; font-weight: 500; }
-        .pergunta-info select:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2); }
-        .pergunta-info select:hover { border-color: #764ba2; }
-        
-        .grafico-container { width: 250px; height: 250px; flex-shrink: 0; position: relative; }
-        
-        .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; border: none; border-radius: 12px; font-size: 1.2rem; font-weight: 700; cursor: pointer; margin-top: 30px; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4); }
-        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(102, 126, 234, 0.6); }
-        
-        .btn-action { padding: 12px 25px; background: #ffffff; color: #667eea; border: 2px solid #667eea; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; margin: 5px; transition: all 0.3s; }
-        .btn-action:hover { background: #667eea; color: #ffffff; transform: translateY(-2px); }
-        
-        .acoes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; justify-content: center; }
-        
-        .msg { padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center; font-weight: 600; display: none; animation: slideIn 0.5s; }
-        .msg.ok { background: #d4edda; color: #155724; border: 2px solid #c3e6cb; display: block; }
-        .msg.erro { background: #f8d7da; color: #721c24; border: 2px solid #f5c6cb; display: block; }
-        
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        @media (max-width: 968px) {
-            .pergunta-row { flex-direction: column; align-items: stretch; }
-            .grafico-container { width: 100%; max-width: 300px; height: 300px; margin: 0 auto; }
-            .container { padding: 20px; }
-            header h1 { font-size: 1.8rem; }
-            .categoria { padding: 20px; }
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1> Questionário Socioeconômico</h1>
-            <p>Pesquisa completa sobre perfil pessoal, educacional e profissional</p>
+            <h1>Questionario Socioeconomico</h1>
+            <p>Pesquisa sobre perfil pessoal, educacional e profissional</p>
         </header>
 
-        <div class="stats-bar" id="contador">📈 Total de respostas registradas: 0</div>
-        <div id="mensagem" class="msg"></div>
+        <div id="secao-formulario">
+            <form id="formQuestionario">
+                <section class="categoria">
+                    <h2>Dados Pessoais</h2>
 
-        <form id="formQuestionario">
-            <!-- DADOS PESSOAIS -->
-            <section class="categoria">
-                <h2>👤 Dados Pessoais</h2>
-                
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>1. Qual é a sua faixa etária?</label>
-                        <select name="p1" required onchange="atualizarGrafico('p1', this.value)">
+                    <div class="pergunta">
+                        <label>1. Qual e a sua faixa etaria?</label>
+                        <select name="perguntaPessoal1" required>
                             <option value="">Selecione...</option>
                             <option>Menos de 18 anos</option>
                             <option>18 a 25 anos</option>
@@ -80,41 +30,32 @@
                             <option>Mais de 50 anos</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp1"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>2. Qual é o seu gênero?</label>
-                        <select name="p2" required onchange="atualizarGrafico('p2', this.value)">
+                    <div class="pergunta">
+                        <label>2. Qual e o seu genero?</label>
+                        <select name="perguntaPessoal2" required>
                             <option value="">Selecione...</option>
                             <option>Feminino</option>
                             <option>Masculino</option>
-                            <option>Não-binário</option>
-                            <option>Prefiro não informar</option>
+                            <option>Nao-binario</option>
+                            <option>Prefiro nao informar</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp2"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>3. Qual é o seu estado civil?</label>
-                        <select name="p3" required onchange="atualizarGrafico('p3', this.value)">
+                    <div class="pergunta">
+                        <label>3. Qual e o seu estado civil?</label>
+                        <select name="perguntaPessoal3" required>
                             <option value="">Selecione...</option>
                             <option>Solteiro(a)</option>
-                            <option>Casado(a) / União estável</option>
+                            <option>Casado(a) / Uniao estavel</option>
                             <option>Divorciado(a)</option>
-                            <option>Viúvo(a)</option>
+                            <option>Viuv(a)</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp3"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
+                    <div class="pergunta">
                         <label>4. Quantas pessoas residem em sua casa?</label>
-                        <select name="p4" required onchange="atualizarGrafico('p4', this.value)">
+                        <select name="perguntaPessoal4" required>
                             <option value="">Selecione...</option>
                             <option>1 pessoa</option>
                             <option>2 pessoas</option>
@@ -122,41 +63,32 @@
                             <option>5 ou mais pessoas</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp4"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>5. Qual é a sua renda familiar mensal?</label>
-                        <select name="p5" required onchange="atualizarGrafico('p5', this.value)">
+                    <div class="pergunta">
+                        <label>5. Qual e a sua renda familiar mensal?</label>
+                        <select name="perguntaPessoal5" required>
                             <option value="">Selecione...</option>
-                            <option>Até 1 salário mínimo</option>
-                            <option>De 1 a 3 salários mínimos</option>
-                            <option>De 3 a 5 salários mínimos</option>
-                            <option>De 5 a 10 salários mínimos</option>
-                            <option>Acima de 10 salários mínimos</option>
+                            <option>Ate 1 salario minimo</option>
+                            <option>De 1 a 3 salarios minimos</option>
+                            <option>De 3 a 5 salarios minimos</option>
+                            <option>De 5 a 10 salarios minimos</option>
+                            <option>Acima de 10 salarios minimos</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp5"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>6. Você é responsável financeiro principal?</label>
-                        <select name="p6" required onchange="atualizarGrafico('p6', this.value)">
+                    <div class="pergunta">
+                        <label>6. Voce e responsavel financeiro principal da familia?</label>
+                        <select name="perguntaPessoal6" required>
                             <option value="">Selecione...</option>
                             <option>Sim</option>
-                            <option>Não</option>
+                            <option>Nao</option>
                             <option>Divido com outra pessoa</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp6"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>7. Qual é a sua região de moradia?</label>
-                        <select name="p7" required onchange="atualizarGrafico('p7', this.value)">
+                    <div class="pergunta">
+                        <label>7. Qual e a sua regiao de moradia?</label>
+                        <select name="perguntaPessoal7" required>
                             <option value="">Selecione...</option>
                             <option>Centro</option>
                             <option>Zona Norte</option>
@@ -166,40 +98,31 @@
                             <option>Periferia</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp7"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>8. Você possui plano de saúde?</label>
-                        <select name="p8" required onchange="atualizarGrafico('p8', this.value)">
+                    <div class="pergunta">
+                        <label>8. Voce possui plano de saude?</label>
+                        <select name="perguntaPessoal8" required>
                             <option value="">Selecione...</option>
                             <option>Sim, particular</option>
-                            <option>Sim, por convênio empresarial</option>
-                            <option>Sim, público (SUS)</option>
-                            <option>Não possuo</option>
+                            <option>Sim, por convenio empresarial</option>
+                            <option>Sim, publico (SUS)</option>
+                            <option>Nao possuo</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp8"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>9. Você possui acesso à internet em casa?</label>
-                        <select name="p9" required onchange="atualizarGrafico('p9', this.value)">
+                    <div class="pergunta">
+                        <label>9. Voce possui acesso a internet em casa?</label>
+                        <select name="perguntaPessoal9" required>
                             <option value="">Selecione...</option>
                             <option>Sim, banda larga fixa</option>
-                            <option>Sim, apenas móvel (celular)</option>
-                            <option>Não possuo</option>
+                            <option>Sim, apenas movel (celular)</option>
+                            <option>Nao possuo</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp9"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>10. Você se considera parte de qual classe social?</label>
-                        <select name="p10" required onchange="atualizarGrafico('p10', this.value)">
+                    <div class="pergunta">
+                        <label>10. Voce se considera parte de qual classe social?</label>
+                        <select name="perguntaPessoal10" required>
                             <option value="">Selecione...</option>
                             <option>Classe A</option>
                             <option>Classe B</option>
@@ -208,148 +131,117 @@
                             <option>Classe E</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gp10"></canvas></div>
-                </div>
-            </section>
+                </section>
 
-            <!-- DADOS EDUCACIONAIS -->
-            <section class="categoria">
-                <h2>🎓 Dados Educacionais</h2>
-                
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>1. Qual é o seu nível de escolaridade?</label>
-                        <select name="e1" required onchange="atualizarGrafico('e1', this.value)">
+                <section class="categoria">
+                    <h2>Dados Educacionais</h2>
+
+                    <div class="pergunta">
+                        <label>1. Qual e o seu nivel de escolaridade atual?</label>
+                        <select name="perguntaEducacional1" required>
                             <option value="">Selecione...</option>
                             <option>Ensino Fundamental incompleto</option>
                             <option>Ensino Fundamental completo</option>
-                            <option>Ensino Médio incompleto</option>
-                            <option>Ensino Médio completo</option>
+                            <option>Ensino Medio incompleto</option>
+                            <option>Ensino Medio completo</option>
                             <option>Superior incompleto</option>
                             <option>Superior completo</option>
-                            <option>Pós-graduação/Mestrado/Doutorado</option>
+                            <option>Pos-graduacao / Mestrado / Doutorado</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge1"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>2. Estudou em escola pública ou privada?</label>
-                        <select name="e2" required onchange="atualizarGrafico('e2', this.value)">
+                    <div class="pergunta">
+                        <label>2. Voce estudou em escola publica ou privada?</label>
+                        <select name="perguntaEducacional2" required>
                             <option value="">Selecione...</option>
-                            <option>Apenas pública</option>
+                            <option>Apenas publica</option>
                             <option>Apenas privada</option>
                             <option>Ambas</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge2"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>3. Última instituição de ensino frequentada?</label>
-                        <select name="e3" required onchange="atualizarGrafico('e3', this.value)">
+                    <div class="pergunta">
+                        <label>3. Qual foi a ultima instituicao de ensino que voce frequentou?</label>
+                        <select name="perguntaEducacional3" required>
                             <option value="">Selecione...</option>
                             <option>Escola municipal/estadual</option>
                             <option>Escola particular</option>
-                            <option>Universidade pública</option>
+                            <option>Universidade publica</option>
                             <option>Universidade privada</option>
-                            <option>Instituto federal/técnico</option>
+                            <option>Instituto federal / tecnico</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge3"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>4. Concluiu o ensino superior?</label>
-                        <select name="e4" required onchange="atualizarGrafico('e4', this.value)">
+                    <div class="pergunta">
+                        <label>4. Voce concluiu o ensino superior?</label>
+                        <select name="perguntaEducacional4" required>
                             <option value="">Selecione...</option>
                             <option>Sim</option>
-                            <option>Não, mas estou cursando</option>
-                            <option>Não, e não pretendo</option>
-                            <option>Não, mas pretendo</option>
+                            <option>Nao, mas estou cursando</option>
+                            <option>Nao, e nao pretendo</option>
+                            <option>Nao, mas pretendo</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge4"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>5. Realizou curso técnico ou profissionalizante?</label>
-                        <select name="e5" required onchange="atualizarGrafico('e5', this.value)">
+                    <div class="pergunta">
+                        <label>5. Voce ja realizou algum curso tecnico ou profissionalizante?</label>
+                        <select name="perguntaEducacional5" required>
                             <option value="">Selecione...</option>
-                            <option>Sim, concluído</option>
+                            <option>Sim, concluido</option>
                             <option>Sim, em andamento</option>
-                            <option>Não, mas tenho interesse</option>
-                            <option>Não, e não tenho interesse</option>
+                            <option>Nao, mas tenho interesse</option>
+                            <option>Nao, e nao tenho interesse</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge5"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>6. Quantos idiomas domina (além do português)?</label>
-                        <select name="e6" required onchange="atualizarGrafico('e6', this.value)">
+                    <div class="pergunta">
+                        <label>6. Quantos idiomas voce domina (alem do portugues)?</label>
+                        <select name="perguntaEducacional6" required>
                             <option value="">Selecione...</option>
                             <option>Nenhum</option>
                             <option>Um</option>
                             <option>Dois</option>
-                            <option>Três ou mais</option>
+                            <option>Tres ou mais</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge6"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>7. Possui certificação profissional reconhecida?</label>
-                        <select name="e7" required onchange="atualizarGrafico('e7', this.value)">
+                    <div class="pergunta">
+                        <label>7. Voce possui alguma certificacao profissional reconhecida?</label>
+                        <select name="perguntaEducacional7" required>
                             <option value="">Selecione...</option>
-                            <option>Sim, várias</option>
+                            <option>Sim, varias</option>
                             <option>Sim, uma ou duas</option>
-                            <option>Não, mas estou buscando</option>
-                            <option>Não</option>
+                            <option>Nao, mas estou buscando</option>
+                            <option>Nao</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge7"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>8. Como avalia a qualidade da educação recebida?</label>
-                        <select name="e8" required onchange="atualizarGrafico('e8', this.value)">
+                    <div class="pergunta">
+                        <label>8. Como voce avalia a qualidade da educacao que recebeu?</label>
+                        <select name="perguntaEducacional8" required>
                             <option value="">Selecione...</option>
                             <option>Excelente</option>
                             <option>Boa</option>
                             <option>Regular</option>
                             <option>Ruim</option>
-                            <option>Péssima</option>
+                            <option>Pessima</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge8"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>9. Pretende continuar os estudos nos próximos 2 anos?</label>
-                        <select name="e9" required onchange="atualizarGrafico('e9', this.value)">
+                    <div class="pergunta">
+                        <label>9. Voce pretende continuar os estudos nos proximos dois anos?</label>
+                        <select name="perguntaEducacional9" required>
                             <option value="">Selecione...</option>
-                            <option>Sim, em graduação</option>
-                            <option>Sim, em pós-graduação</option>
+                            <option>Sim, em graduacao</option>
+                            <option>Sim, em pos-graduacao</option>
                             <option>Sim, em cursos livres</option>
-                            <option>Não pretendo</option>
+                            <option>Nao pretendo</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge9"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>10. Principal fator que influenciou sua trajetória educacional?</label>
-                        <select name="e10" required onchange="atualizarGrafico('e10', this.value)">
+                    <div class="pergunta">
+                        <label>10. Qual foi o principal fator que influenciou sua trajetoria educacional?</label>
+                        <select name="perguntaEducacional10" required>
                             <option value="">Selecione...</option>
                             <option>Apoio familiar</option>
                             <option>Oportunidades financeiras</option>
@@ -358,379 +250,159 @@
                             <option>Dificuldades financeiras</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="ge10"></canvas></div>
-                </div>
-            </section>
+                </section>
 
-            <!-- DADOS PROFISSIONAIS -->
-            <section class="categoria">
-                <h2>💼 Dados Profissionais</h2>
-                
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>1. Situação atual no mercado de trabalho?</label>
-                        <select name="f1" required onchange="atualizarGrafico('f1', this.value)">
+                <section class="categoria">
+                    <h2>Dados Profissionais</h2>
+
+                    <div class="pergunta">
+                        <label>1. Qual e a sua situacao atual no mercado de trabalho?</label>
+                        <select name="perguntaProfissional1" required>
                             <option value="">Selecione...</option>
                             <option>Empregado(a) com carteira assinada</option>
                             <option>Empregado(a) sem carteira</option>
-                            <option>Autônomo(a)</option>
-                            <option>Empresário(a)</option>
+                            <option>Autonomo(a)</option>
+                            <option>Empresario(a)</option>
                             <option>Desempregado(a)</option>
                             <option>Aposentado(a)</option>
                             <option>Estudante</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf1"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>2. Há quanto tempo está na ocupação atual?</label>
-                        <select name="f2" required onchange="atualizarGrafico('f2', this.value)">
+                    <div class="pergunta">
+                        <label>2. Ha quanto tempo voce esta na sua ocupacao atual?</label>
+                        <select name="perguntaProfissional2" required>
                             <option value="">Selecione...</option>
                             <option>Menos de 1 ano</option>
                             <option>De 1 a 3 anos</option>
                             <option>De 3 a 5 anos</option>
                             <option>Mais de 5 anos</option>
-                            <option>Não estou trabalhando</option>
+                            <option>Nao estou trabalhando</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf2"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>3. Ramo de atuação?</label>
-                        <select name="f3" required onchange="atualizarGrafico('f3', this.value)">
+                    <div class="pergunta">
+                        <label>3. Qual e o seu ramo de atuacao?</label>
+                        <select name="perguntaProfissional3" required>
                             <option value="">Selecione...</option>
                             <option>Tecnologia</option>
-                            <option>Saúde</option>
-                            <option>Educação</option>
-                            <option>Comércio</option>
-                            <option>Indústria</option>
-                            <option>Serviços</option>
+                            <option>Saude</option>
+                            <option>Educacao</option>
+                            <option>Comercio</option>
+                            <option>Industria</option>
+                            <option>Servicos</option>
                             <option>Outro</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf3"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>4. Nível hierárquico atual?</label>
-                        <select name="f4" required onchange="atualizarGrafico('f4', this.value)">
+                    <div class="pergunta">
+                        <label>4. Qual e o seu nivel hierarquico atual?</label>
+                        <select name="perguntaProfissional4" required>
                             <option value="">Selecione...</option>
-                            <option>Estagiário/Aprendiz</option>
-                            <option>Operacional/Auxiliar</option>
-                            <option>Técnico/Analista</option>
-                            <option>Coordenação/Supervisão</option>
-                            <option>Gerência</option>
+                            <option>Estagiario / Aprendiz</option>
+                            <option>Operacional / Auxiliar</option>
+                            <option>Tecnico / Analista</option>
+                            <option>Coordenacao / Supervisao</option>
+                            <option>Gerencia</option>
                             <option>Diretoria</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf4"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>5. Trabalha na sua área de formação?</label>
-                        <select name="f5" required onchange="atualizarGrafico('f5', this.value)">
+                    <div class="pergunta">
+                        <label>5. Voce trabalha na sua area de formacao?</label>
+                        <select name="perguntaProfissional5" required>
                             <option value="">Selecione...</option>
                             <option>Sim, totalmente</option>
                             <option>Parcialmente</option>
-                            <option>Não</option>
-                            <option>Não sou formado</option>
+                            <option>Nao</option>
+                            <option>Nao sou formado</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf5"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>6. Faixa salarial mensal?</label>
-                        <select name="f6" required onchange="atualizarGrafico('f6', this.value)">
+                    <div class="pergunta">
+                        <label>6. Qual e a sua faixa salarial mensal?</label>
+                        <select name="perguntaProfissional6" required>
                             <option value="">Selecione...</option>
-                            <option>Até 1 salário mínimo</option>
-                            <option>De 1 a 3 salários mínimos</option>
-                            <option>De 3 a 5 salários mínimos</option>
-                            <option>De 5 a 10 salários mínimos</option>
-                            <option>Acima de 10 salários mínimos</option>
+                            <option>Ate 1 salario minimo</option>
+                            <option>De 1 a 3 salarios minimos</option>
+                            <option>De 3 a 5 salarios minimos</option>
+                            <option>De 5 a 10 salarios minimos</option>
+                            <option>Acima de 10 salarios minimos</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf6"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>7. Possui outro emprego ou fonte de renda?</label>
-                        <select name="f7" required onchange="atualizarGrafico('f7', this.value)">
+                    <div class="pergunta">
+                        <label>7. Voce possui outro emprego ou fonte de renda?</label>
+                        <select name="perguntaProfissional7" required>
                             <option value="">Selecione...</option>
                             <option>Sim</option>
-                            <option>Não</option>
+                            <option>Nao</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf7"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>8. Como avalia a estabilidade do emprego atual?</label>
-                        <select name="f8" required onchange="atualizarGrafico('f8', this.value)">
+                    <div class="pergunta">
+                        <label>8. Como voce avalia a estabilidade do seu emprego atual?</label>
+                        <select name="perguntaProfissional8" required>
                             <option value="">Selecione...</option>
-                            <option>Muito estável</option>
-                            <option>Estável</option>
+                            <option>Muito estavel</option>
+                            <option>Estavel</option>
                             <option>Incerto</option>
-                            <option>Instável</option>
-                            <option>Não se aplica</option>
+                            <option>Instavel</option>
+                            <option>Nao se aplica</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf8"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>9. Pretende mudar de emprego nos próximos 12 meses?</label>
-                        <select name="f9" required onchange="atualizarGrafico('f9', this.value)">
+                    <div class="pergunta">
+                        <label>9. Voce pretende mudar de emprego nos proximos 12 meses?</label>
+                        <select name="perguntaProfissional9" required>
                             <option value="">Selecione...</option>
                             <option>Sim, com certeza</option>
                             <option>Talvez</option>
-                            <option>Não</option>
-                            <option>Não se aplica</option>
+                            <option>Nao</option>
+                            <option>Nao se aplica</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf9"></canvas></div>
-                </div>
 
-                <div class="pergunta-row">
-                    <div class="pergunta-info">
-                        <label>10. Fator que mais influencia satisfação profissional?</label>
-                        <select name="f10" required onchange="atualizarGrafico('f10', this.value)">
+                    <div class="pergunta">
+                        <label>10. Qual fator mais influencia sua satisfacao profissional?</label>
+                        <select name="perguntaProfissional10" required>
                             <option value="">Selecione...</option>
-                            <option>Salário</option>
+                            <option>Salario</option>
                             <option>Ambiente de trabalho</option>
                             <option>Oportunidades de crescimento</option>
                             <option>Reconhecimento</option>
-                            <option>Equilíbrio vida pessoal/trabalho</option>
+                            <option>Equilibrio vida pessoal/trabalho</option>
                         </select>
                     </div>
-                    <div class="grafico-container"><canvas id="gf10"></canvas></div>
-                </div>
+                </section>
+
+                <button type="submit" class="btn-enviar">Enviar Respostas</button>
+            </form>
+        </div>
+
+        <div id="secao-graficos" style="display:none;">
+            <div class="acao">
+                <button onclick="voltarFormulario()" class="btn-secundario">Responder Novamente</button>
+                <button onclick="carregarEstatisticas()" class="btn-secundario">Atualizar Graficos</button>
+            </div>
+
+            <section class="categoria-graficos">
+                <h2>Resultados - Dados Pessoais</h2>
+                <div id="graficos-pessoal" class="grid-graficos"></div>
             </section>
 
-            <button type="button" class="btn-submit" onclick="salvarResposta()">💾 Salvar Respostas</button>
-        </form>
+            <section class="categoria-graficos">
+                <h2>Resultados - Dados Educacionais</h2>
+                <div id="graficos-educacional" class="grid-graficos"></div>
+            </section>
 
-        <div class="acoes">
-            <button class="btn-action" onclick="limparDados()">🗑️ Limpar Dados</button>
-            <button class="btn-action" onclick="exportarDados()">📥 Exportar JSON</button>
+            <section class="categoria-graficos">
+                <h2>Resultados - Dados Profissionais</h2>
+                <div id="graficos-profissional" class="grid-graficos"></div>
+            </section>
         </div>
     </div>
 
-    <script>
-        const paletaCores = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#43e97b', '#fa709a', '#fee140', '#30cfd0', '#a8edea', '#fed6e3'];
-        const graficos = {};
-        const dadosRespostas = {};
-
-        // Inicializar todos os gráficos
-        function inicializarGraficos() {
-            const prefixos = ['p', 'e', 'f'];
-            prefixos.forEach(prefix => {
-                for(let i = 1; i <= 10; i++) {
-                    const id = 'g' + prefix + i;
-                    criarGrafico(id, []);
-                }
-            });
-        }
-
-        function criarGrafico(canvasId, labels) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            graficos[canvasId] = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: [],
-                        backgroundColor: paletaCores,
-                        borderColor: '#ffffff',
-                        borderWidth: 3,
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true,
-                    plugins: {
-                        legend: { 
-                            position: 'bottom', 
-                            labels: { 
-                                color: '#1e3c72', 
-                                font: { size: 11, weight: '600' },
-                                padding: 10,
-                                boxWidth: 12
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(30, 60, 114, 0.95)',
-                            titleColor: '#ffffff',
-                            bodyColor: '#ffffff',
-                            borderColor: '#667eea',
-                            borderWidth: 2,
-                            callbacks: {
-                                label: function(context) {
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const pct = total > 0 ? ((context.parsed / total) * 100).toFixed(1) : 0;
-                                    return context.label + ': ' + context.parsed + ' (' + pct + '%)';
-                                }
-                            }
-                        }
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
-                    }
-                }
-            });
-        }
-
-        function atualizarGrafico(campo, valor) {
-            if(!valor || valor === '') return;
-            
-            if(!dadosRespostas[campo]) dadosRespostas[campo] = {};
-            dadosRespostas[campo][valor] = (dadosRespostas[campo][valor] || 0) + 1;
-            
-            const canvasId = 'g' + campo;
-            const grafico = graficos[canvasId];
-            
-            if(grafico) {
-                const labels = Object.keys(dadosRespostas[campo]);
-                const valores = Object.values(dadosRespostas[campo]);
-                
-                grafico.data.labels = labels;
-                grafico.data.datasets[0].data = valores;
-                grafico.update();
-            }
-            
-            atualizarContador();
-            salvarNoStorage();
-        }
-
-        function atualizarContador() {
-            let total = 0;
-            for(let campo in dadosRespostas) {
-                for(let val in dadosRespostas[campo]) {
-                    total += dadosRespostas[campo][val];
-                }
-            }
-            document.getElementById('contador').innerHTML = '📈 Total de respostas registradas: ' + total;
-        }
-
-        function salvarResposta() {
-            const form = document.getElementById('formQuestionario');
-            const formData = new FormData(form);
-            const respostas = {};
-            let preenchidas = 0;
-            
-            for(let [key, value] of formData.entries()) {
-                if(value && value !== '') {
-                    respostas[key] = value;
-                    preenchidas++;
-                }
-            }
-            
-            if(preenchidas < 30) {
-                mostrarMensagem('⚠️ Por favor, responda todas as 30 perguntas! (' + preenchidas + '/30)', 'erro');
-                return;
-            }
-            
-            const dadosCompletos = {
-                timestamp: new Date().toISOString(),
-                respostas: respostas
-            };
-            
-            localStorage.setItem('resposta_' + Date.now(), JSON.stringify(dadosCompletos));
-            localStorage.setItem('dados_agregados', JSON.stringify(dadosRespostas));
-            
-            mostrarMensagem('✅ Respostas salvas com sucesso! Dados armazenados localmente.', 'ok');
-            
-            setTimeout(() => {
-                if(confirm('Deseja responder o questionário novamente?')) {
-                    form.reset();
-                    location.reload();
-                }
-            }, 1500);
-        }
-
-        function carregarDadosSalvos() {
-            const dados = JSON.parse(localStorage.getItem('dados_agregados') || '{}');
-            
-            for(let campo in dados) {
-                dadosRespostas[campo] = dados[campo];
-                const canvasId = 'g' + campo;
-                
-                if(graficos[canvasId]) {
-                    graficos[canvasId].data.labels = Object.keys(dados[campo]);
-                    graficos[canvasId].data.datasets[0].data = Object.values(dados[campo]);
-                    graficos[canvasId].update();
-                }
-            }
-            atualizarContador();
-        }
-
-        function salvarNoStorage() {
-            localStorage.setItem('dados_agregados', JSON.stringify(dadosRespostas));
-        }
-
-        function limparDados() {
-            if(confirm('⚠️ Tem certeza que deseja apagar TODOS os dados salvos?')) {
-                localStorage.removeItem('dados_agregados');
-                const keys = Object.keys(localStorage);
-                keys.forEach(key => {
-                    if(key.startsWith('resposta_')) {
-                        localStorage.removeItem(key);
-                    }
-                });
-                location.reload();
-            }
-        }
-
-        function exportarDados() {
-            const dadosExport = {
-                dataExportacao: new Date().toISOString(),
-                totalRespostas: Object.keys(dadosRespostas).length,
-                dados: dadosRespostas
-            };
-            
-            const blob = new Blob([JSON.stringify(dadosExport, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'questionario_socioeconomico_' + new Date().toISOString().split('T')[0] + '.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            mostrarMensagem('📥 Dados exportados com sucesso!', 'ok');
-        }
-
-        function mostrarMensagem(texto, tipo) {
-            const msg = document.getElementById('mensagem');
-            msg.className = 'msg ' + tipo;
-            msg.textContent = texto;
-            setTimeout(() => {
-                msg.className = 'msg';
-                msg.style.display = 'none';
-            }, 5000);
-        }
-
-        window.onload = function() {
-            inicializarGraficos();
-            carregarDadosSalvos();
-        };
-
-        window.onbeforeunload = function() {
-            salvarNoStorage();
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
